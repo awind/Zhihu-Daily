@@ -1,12 +1,35 @@
 .root {
-    flex-grow: 1
+    flex-grow: 1;
+    width: 100%;
+}
+
+.appbar {
+    position: static;
 }
 
 .flex {
     flex-grow: 1;
 }
 
-.menu-button {
-    margin-left: -12px;
-    margin-right: 20px;
+.drawer {
+    width: 250px;
+    height: 100%;
+}
+
+.drawer-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background: #0C88EA;
+}
+
+.avatar {
+    margin: 24px 16px;
+}
+
+.username {
+    color: white;
+    font: 14px;
+    margin: 24px 0;
 }
