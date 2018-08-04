@@ -2,28 +2,23 @@ import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import * as API from '../utils/api'
 import '../css/NewsList.css'
-import { Divider } from '../../node_modules/@material-ui/core'
+import { Divider } from '@material-ui/core'
+import { connect } from 'react-redux'
+import { requestNews, receiveNews } from '../actions/NewsAction'
 
 class NewsList extends Component {
 
-    constructor() {
-        super()
-        this.state = {
-            stories: []
-        }
-    }
-
     componentDidMount() {
+        const { dispatch } = this.props
+        dispatch(requestNews())
         API.fetLatestNews().then(data => {
             console.log(data)
-            this.setState({
-                stories: data.stories
-            })
+            dispatch(receiveNews(data.stories, data.top_stories))
         })
     }
 
     render() {
-        const stories = this.state.stories
+        const { stories } = this.props
         return (
             <div className="list-container">
                 <ul className="list">
@@ -41,4 +36,10 @@ class NewsList extends Component {
     }
 }
 
-export default NewsList
+function mapStateToProps(state) {
+    return {
+        stories: state.news.stories,
+    }
+}
+
+export default connect(mapStateToProps)(NewsList)

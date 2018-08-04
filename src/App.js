@@ -5,6 +5,7 @@ import AppHeader from './components/AppHeader'
 import * as API from './utils/api'
 import { connect } from 'react-redux'
 import { receiveThemes, requestThemes } from './actions'
+import HotNews from './components/HotNews';
 
 class App extends Component {
 
@@ -19,8 +20,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppHeader></AppHeader>
-        <NewsList></NewsList>
+        <AppHeader className="header"></AppHeader>
+        <HotNews className="slider"></HotNews>
+        <NewsList className="list"></NewsList>
       </div>
     );
   }
