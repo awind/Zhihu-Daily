@@ -3,12 +3,16 @@ import NewsList from './components/NewsList'
 import './App.css'
 import AppHeader from './components/AppHeader'
 import * as API from './utils/api'
+import { connect } from 'react-redux'
+import { receiveThemes, requestThemes } from './actions'
 
 class App extends Component {
 
   componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(requestThemes())
     API.getNewsTheme().then(data => {
-      console.log(data.others)
+      dispatch(receiveThemes(data.others))
     })
   }
 
@@ -22,4 +26,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    themes: state.themes,
+  }
+}
+
+export default connect(mapStateToProps,)(App)

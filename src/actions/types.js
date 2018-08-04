@@ -1,0 +1,2 @@
+export const REQUEST_THEMES = 'REQUEST_THEMES'
+export const RECEIVE_THEMES = 'RECEIVE_THEMES'
