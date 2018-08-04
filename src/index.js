@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Router } from 'react-router-dom'
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose } from '../../../../Library/Caches/typescript/2.9/node_modules/redux'
 import { Provider } from 'react-redux'
 import logger from 'redux-logger'
 import createBrowserHistory from 'history/createBrowserHistory'
-import rootReducer from './reducers/index'
+import rootReducer from './reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
