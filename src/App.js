@@ -5,24 +5,33 @@ import AppHeader from './components/AppHeader'
 import * as API from './utils/api'
 import { connect } from 'react-redux'
 import { receiveThemes, requestThemes } from './actions'
-import HotNews from './components/HotNews';
+import HotNews from './components/HotNews'
+import { Route, Switch } from 'react-router-dom'
+import NewsDetail from './components/NewsDetail'
+import { withRouter } from 'react-router'
 
 class App extends Component {
 
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(requestThemes())
+    this.props.requestThemes()
     API.getNewsTheme().then(data => {
-      dispatch(receiveThemes(data.others))
+      this.props.receiveThemes(data.others)
     })
   }
 
   render() {
     return (
       <div className="App">
-        <AppHeader className="header"></AppHeader>
-        <HotNews className="slider"></HotNews>
-        <NewsList className="list"></NewsList>
+        <Switch>
+          <Route exact path='/' component={() => (
+            <div>
+              <AppHeader></AppHeader>
+              <HotNews></HotNews>
+              <NewsList></NewsList>
+            </div>
+          )}></Route>
+          <Route exact path='/detail/:id' component={NewsDetail}></Route>
+        </Switch>
       </div>
     );
   }
@@ -34,4 +43,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps,)(App)
+export default withRouter(connect(mapStateToProps,{requestThemes, receiveThemes})(App))

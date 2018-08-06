@@ -1,20 +1,29 @@
 import React, { Component } from 'react'
-import Slider from 'react-slick'
 import '../css/HotNews.css'
 import { connect } from 'react-redux'
 import filter from '../utils/filter'
+import { withRouter } from 'react-router'
+import Slider from 'react-slick'
 
 class HotNews extends Component {
+
+    handleOnClick = (item) => {
+        console.log("item .....")
+        const { history } = this.props
+        // history.push('/detail/' + item.id)
+    }
     
     render() {
         const topStories = this.props.topStories
 
         const settings = {
-            autoplay: true,
+            dots: true,
             infinite: true,
+            autoplay: true,
+            speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1,
-            swipeToSlide: true,
+            adaptiveHeight: true,
         }
 
         return (
@@ -25,6 +34,7 @@ class HotNews extends Component {
                             <div className="slider-item" key={index}>
                                 <img className="slider-image" alt={item.title} src={filter.replaceUrl(item.image)} />
                                 <p className="title">{item.title}</p>
+                                <div className="overlay-layer"></div>
                             </div>
                         )
                     })}
@@ -40,4 +50,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(HotNews)
+export default withRouter(connect(mapStateToProps)(HotNews))
