@@ -9,11 +9,10 @@ import { requestNews, receiveNews } from '../actions/NewsAction'
 class NewsList extends Component {
 
     componentDidMount() {
-        const { dispatch } = this.props
-        dispatch(requestNews())
+        this.props.requestNews()
         API.fetLatestNews().then(data => {
             console.log(data)
-            dispatch(receiveNews(data.stories, data.top_stories))
+            this.props.receiveNews(data.stories, data.top_stories)
         })
     }
 
@@ -25,7 +24,7 @@ class NewsList extends Component {
                     { stories && stories.map((item, index) => {
                         return (
                             <li key={index}>
-                                <NewsItem title={item.title} image={item.images} />
+                                <NewsItem news={item} />
                                 <Divider />
                             </li> 
                         )})
@@ -42,4 +41,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(NewsList)
+export default connect(mapStateToProps, {requestNews, receiveNews})(NewsList)
