@@ -32,8 +32,8 @@ class HotNews extends Component {
                         return (
                             <div className="slider-item" key={index} onClick={() => this.handleOnClick(item)}>
                                 <img className="slider-image" alt={item.title} src={filter.replaceUrl(item.image)} />
-                                <p className="title">{item.title}</p>
                                 <div className="overlay-layer"></div>
+                                <p className="title">{item.title}</p>
                             </div>
                         )
                     })}
