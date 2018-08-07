@@ -8,9 +8,8 @@ import Slider from 'react-slick'
 class HotNews extends Component {
 
     handleOnClick = (item) => {
-        console.log("item .....")
         const { history } = this.props
-        // history.push('/detail/' + item.id)
+        history.push('/detail/' + item.id)
     }
     
     render() {
@@ -31,7 +30,7 @@ class HotNews extends Component {
                 <Slider className="slider" {...settings}>
                     { topStories && topStories.map((item, index) => {
                         return (
-                            <div className="slider-item" key={index}>
+                            <div className="slider-item" key={index} onClick={() => this.handleOnClick(item)}>
                                 <img className="slider-image" alt={item.title} src={filter.replaceUrl(item.image)} />
                                 <p className="title">{item.title}</p>
                                 <div className="overlay-layer"></div>
