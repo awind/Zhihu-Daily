@@ -1,0 +1,33 @@
+.comment-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.author-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.content {
+    font-size: 1em;
+    padding: 0 16px;
+    margin: 0;
+}

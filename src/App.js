@@ -9,6 +9,7 @@ import HotNews from './components/HotNews'
 import { Route, Switch } from 'react-router-dom'
 import NewsDetail from './components/NewsDetail'
 import { withRouter } from 'react-router'
+import CommentList from './components/CommentsList';
 
 class App extends Component {
 
@@ -31,6 +32,7 @@ class App extends Component {
             </div>
           )}></Route>
           <Route exact path='/detail/:id' component={NewsDetail}></Route>
+          <Route exact path='/comments/:id' component={CommentList}></Route>
         </Switch>
       </div>
     );

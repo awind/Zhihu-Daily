@@ -11,7 +11,6 @@ class NewsList extends Component {
     componentDidMount() {
         this.props.requestNews()
         API.fetLatestNews().then(data => {
-            console.log(data)
             this.props.receiveNews(data.stories, data.top_stories)
         })
     }
