@@ -7,8 +7,19 @@ import ShareIcon from '@material-ui/icons/Share'
 import StarIcon from '@material-ui/icons/Star'
 import CommentIcon from '@material-ui/icons/Comment'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import Badge from '@material-ui/core/Badge'
 import { withRouter } from 'react-router'
+import { withStyles } from '@material-ui/core/styles'
 import '../css/DetailHeader.css'
+
+const styles = theme => ({
+    badge: {
+      top: 1,
+      right: -20,
+      fontSize: 16,
+      // The border color match the background color
+    },
+  });
 
 class DetailHeader extends Component {
 
@@ -36,6 +47,7 @@ class DetailHeader extends Component {
     }
 
     render() {
+        const { classes } = this.props
         return (
             <div className="root">
                 <AppBar style={{ backgroundColor: '#0C88EA' }}>
@@ -54,11 +66,15 @@ class DetailHeader extends Component {
                             </IconButton>
 
                             <IconButton color="inherit" aria-label="Comments" onClick={this.handleOnClickComments}>
-                                <CommentIcon />
+                                <Badge badgeContent={this.props.commentCount} classes={{ badge: classes.badge}}>
+                                    <CommentIcon />
+                                </Badge>
                             </IconButton>
 
-                            <IconButton color="inherit" aria-label="Thumb Up" onClick={this.handleOnClickThumbUp}>
-                                <ThumbUpIcon />
+                            <IconButton aria-label="Thumb Up" color="inherit" onClick={this.handleOnClickThumbUp}>
+                                <Badge classes={{ badge: classes.badge}}>
+                                    <ThumbUpIcon />
+                                </Badge>
                             </IconButton>
                         </div>
                     </Toolbar>
@@ -68,4 +84,4 @@ class DetailHeader extends Component {
     }
 }
 
-export default withRouter(DetailHeader)
+export default withRouter(withStyles(styles)(DetailHeader))

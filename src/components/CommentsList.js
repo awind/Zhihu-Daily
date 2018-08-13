@@ -1,53 +1,35 @@
 import React, { Component } from 'react'
-import * as API from '../utils/api'
 import CommentsHeader from './CommentsHeader';
-import { throws } from 'assert';
 import CommentItem from './CommentItem';
+import { connect } from 'react-redux'
 import '../css/CommentsList.css'
+import { Divider } from '@material-ui/core';
 
-class CommentList extends Component {
-
-    constructor() {
-        super()
-        this.state = {
-            longComments: [],
-            shortComments: [],
-        }
-    }
-
-    componentDidMount() {
-        const { id } = this.props.match.params
-        API.getLongComments(id).then((data) => {
-            
-            if (data !== null) {
-                console.log(data)
-                this.setState({
-                    longComments: data.comments,
-                })
-            }
-        })
-        API.getShortComments(id).then((data) => {
-            if (data !== null) {
-                console.log(data.comments)
-                this.setState({
-                    shortComments: data.comments,
-                })
-            }
-        })
-    }
+class CommentsList extends Component {
 
     render() {
-        const longCount = this.state.longComments.length
-        const shortCount = this.state.shortComments.length
+        const longCount = this.props.longComments.length
+        const shortCount = this.props.shortComments.length
+
         return (
             <div className="comments-list">
                 <CommentsHeader count={longCount + shortCount}></CommentsHeader>
-                { this.state.longComments && this.state.longComments.map((item, index) => {
-                    return <CommentItem item={item}></CommentItem>
+                { longCount > 0 && this.props.longComments.map((item, index) => {
+                    return <div>
+                        <CommentItem key={index} item={item}></CommentItem>
+                        <Divider />
+                    </div>
                 })}
             </div>
         )
     }
 }
 
-export default CommentList
+function mapStateToProps(state) {
+    return {
+        longComments: state.comments.longComments,
+        shortComments: state.comments.shortComments,
+    }
+}
+
+export default connect(mapStateToProps)(CommentsList)

@@ -3,6 +3,8 @@ import * as API from '../utils/api'
 import renderHTML from 'react-render-html'
 import DetailHeader from './DetailHeader'
 import filter from '../utils/filter'
+import { connect } from 'react-redux'
+import { requestComments, receiveLongComments, receiveShortComments } from '../actions/CommentsAction'
 import '../css/NewsDetail.css'
 
 class NewsDetail extends Component {
@@ -11,18 +13,61 @@ class NewsDetail extends Component {
         super()
         this.state = {
             detail: '',
+            // longComments: [],
+            // shortComments: [],
         }
     }
 
-    componentDidMount() {
-        API.getNewsDetail(this.props.match.params.id)
-            .then(data => {
+    fetchComments = (id) => {
+        this.props.requestComments()
+        API.getLongComments(id).then((data) => {
+            if (data !== null) {
+                // return type is not array when there is only one comment
+                if (data.comments.constructor === Array) {
+                    // this.setState({
+                    //     longComments: data.comments,
+                    // })
+                    this.props.receiveLongComments(data.comments)
+                } else {
+                    // this.setState({
+                    //     longComments: [data.comments]
+                    // })
+                    this.props.receiveLongComments([data.comments])
+                }
+            }
+        })
+        API.getShortComments(id).then((data) => {
+            if (data !== null) {
                 console.log(data)
-                this.setState({detail: data})
+                if (data.comments.constructor === Array) {
+                    // this.setState({
+                    //     shortComments: data.comments,
+                    // })
+                    this.props.receiveShortComments(data.comments)
+                } else {
+                    // this.setState({
+                    //     shortComments: [data.comments]
+                    // })
+                    this.props.receiveShortComments([data.comments])
+                }
+            }
         })
     }
 
+    componentDidMount() {
+        const { id } = this.props.match.params
+        API.getNewsDetail(id)
+            .then(data => {
+                // console.log(data)
+                this.setState({detail: data})
+        })
+        this.fetchComments(id)
+    }
+
     render() {
+        const longCount = this.props.longComments.length
+        const shortCount = this.props.shortComments.length
+
         const { id, body, css, image, title, image_source } = this.state.detail
         var url = image
         if (image !== undefined) {
@@ -39,7 +84,7 @@ class NewsDetail extends Component {
         const html = '<link rel="stylesheet" type="text/css" href=' + css + ' />' + result
         return (
             <div className="detail-container">
-                <DetailHeader id={id}></DetailHeader>
+                <DetailHeader id={id} commentCount={longCount + shortCount}></DetailHeader>
                 { body && renderHTML(html) }
                 { image && <div className="header">
                     <img className="detail-image" src={url} alt={title}/>
@@ -52,4 +97,11 @@ class NewsDetail extends Component {
     }
 }
 
-export default NewsDetail
+function mapStateToProps(state) {
+    return {
+        longComments: state.comments.longComments,
+        shortComments: state.comments.shortComments,
+    }
+}
+
+export default connect(mapStateToProps, {requestComments, receiveLongComments, receiveShortComments})(NewsDetail)

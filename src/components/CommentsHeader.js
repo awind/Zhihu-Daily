@@ -4,7 +4,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import BackIcon from '@material-ui/icons/ArrowBack'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import { withRouter } from 'react-router'
 
 class CommentsHeader extends Component {

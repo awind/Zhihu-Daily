@@ -14,12 +14,14 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin: 8px 0;
 }
 
 .author-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-right: 16px;
 }
 
 .author {
@@ -28,6 +30,6 @@
 
 .content {
     font-size: 1em;
-    padding: 0 16px;
+    padding-right: 16px;
     margin: 0;
 }
