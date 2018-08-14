@@ -13,8 +13,6 @@ class NewsDetail extends Component {
         super()
         this.state = {
             detail: '',
-            // longComments: [],
-            // shortComments: [],
         }
     }
 
@@ -24,14 +22,8 @@ class NewsDetail extends Component {
             if (data !== null) {
                 // return type is not array when there is only one comment
                 if (data.comments.constructor === Array) {
-                    // this.setState({
-                    //     longComments: data.comments,
-                    // })
                     this.props.receiveLongComments(data.comments)
                 } else {
-                    // this.setState({
-                    //     longComments: [data.comments]
-                    // })
                     this.props.receiveLongComments([data.comments])
                 }
             }
@@ -40,14 +32,8 @@ class NewsDetail extends Component {
             if (data !== null) {
                 console.log(data)
                 if (data.comments.constructor === Array) {
-                    // this.setState({
-                    //     shortComments: data.comments,
-                    // })
                     this.props.receiveShortComments(data.comments)
                 } else {
-                    // this.setState({
-                    //     shortComments: [data.comments]
-                    // })
                     this.props.receiveShortComments([data.comments])
                 }
             }
