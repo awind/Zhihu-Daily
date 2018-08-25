@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import CommentsHeader from './CommentsHeader';
 import CommentItem from './CommentItem';
 import { connect } from 'react-redux'
+import * as API from '../utils/api'
 import '../css/CommentsList.css'
 import { Divider, Collapse, List, ListItem, ListItemText } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import EmptyPlaceholder from './EmptyPlaceholder'
 
 class CommentsList extends Component {
 
@@ -13,7 +15,33 @@ class CommentsList extends Component {
         super()
         this.state = {
             isShortCommentOpen: false,
+            longComments: [],
+            shortComments: [],
         }
+    }
+
+    componentDidMount() {
+        const { id } = this.props.match.params
+        API.getLongComments(id).then((data) => {
+            if (data !== null) {
+                // return type is not array when there is only one comment
+                if (data.comments.constructor === Array) {
+                    this.setState({longComments: data.comments})
+                } else {
+                    this.setState({longComments: [data.comments]})
+                }
+            }
+        })
+        API.getShortComments(id).then((data) => {
+            if (data !== null) {
+                console.log(data)
+                if (data.comments.constructor === Array) {
+                    this.setState({shortComments: data.comments})
+                } else {
+                    this.setState({shortComments: [data.comments]})
+                }
+            }
+        })
     }
 
     handleOnClickShortComments = () => {
@@ -24,10 +52,12 @@ class CommentsList extends Component {
     }
 
     render() {
-        const longCount = this.props.longComments.length
-        const shortCount = this.props.shortComments.length
+        console.log(this.state.longComments)
+        console.log(this.state.shortComments)
+        const longCount = this.state.longComments.length
+        const shortCount = this.state.shortComments.length
         const longTitle = longCount + "条长评"
-        const shortTitle = shortCount + "条长评"
+        const shortTitle = shortCount + "条短评"
 
         return (
             <div className="comments-list">
@@ -37,42 +67,38 @@ class CommentsList extends Component {
                         <ListItemText primary={longTitle} />
                     </ListItem>
                     <List component="div" disablePadding>
-                            { longCount > 0 && this.props.longComments.map((item, index) => {
+                            { longCount > 0 && this.state.longComments.map((item, index) => {
                                 return (<div>
                                     <CommentItem key={index} item={item}></CommentItem>
                                     <Divider />
                                     </div>)
                             })}
+
+                            { longCount === 0 && <EmptyPlaceholder />}
+                            
                     </List>
                 </List>
 
                 <List component="nav" style={{margin: '0', padding: '0'}}>
                     <ListItem button onClick={this.handleOnClickShortComments}>
                         <ListItemText primary={shortTitle} />
-                        {this.state.isShortCommentOpen ? <ExpandLess /> : <ExpandMore />}
+                        {this.state.isShortCommentOpen && this.state.shortComments.length > 0 ? <ExpandLess /> : <div />}
                     </ListItem>
 
                     <Collapse in={this.state.isShortCommentOpen} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            { longCount > 0 && this.props.shortComments.map((item, index) => {
+                            { shortCount > 0 && this.state.shortComments.map((item, index) => {
                                 return (<div>
                                     <CommentItem key={index} item={item}></CommentItem>
                                     <Divider />
                                     </div>)
                                 })}
                         </List>
-                </Collapse>
+                    </Collapse>
                 </List>
             </div>
         )
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        longComments: state.comments.longComments,
-        shortComments: state.comments.shortComments,
-    }
-}
-
-export default connect(mapStateToProps)(CommentsList)
+export default CommentsList

@@ -26,7 +26,7 @@ export const getNewsDetail = (id) =>
         .then(res => res.json()).then(data => data.query.results.json)
 
 export const getExtraNews = (id) => 
-    fetch(NEWS_EXTRA_API.replace('{date}', id))
+    fetch(NEWS_EXTRA_API.replace('{id}', id))
         .then(res => res.json()).then(data => data.query.results.json)
 
 export const getNewsBefore = (date) =>

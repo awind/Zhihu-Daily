@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-content: center;
+    width: 100%;
 }
 
 .avatar {
@@ -16,17 +17,23 @@
     justify-content: flex-start;
     padding-top: 0;
     padding-bottom: 16px;
+    width: 100%;
 }
 
 .author-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding-right: 16px;
 }
 
 .author {
     font-weight: bold;
+    flex: 1;
+}
+
+.thumb {
+    flex: 1;
 }
 
 .content {

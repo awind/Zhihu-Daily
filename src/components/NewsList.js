@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import * as API from '../utils/api'
 import '../css/NewsList.css'
-import { Divider } from '@material-ui/core'
+import { Divider, List, ListSubheader } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { requestNews, receiveNews } from '../actions/NewsAction'
 
@@ -19,7 +19,7 @@ class NewsList extends Component {
         const { stories } = this.props
         return (
             <div className="list-container">
-                <ul className="list">
+                <List className="list" subheader={<ListSubheader>每日新闻</ListSubheader>}>
                     { stories && stories.map((item, index) => {
                         return (
                             <li key={index}>
@@ -28,7 +28,7 @@ class NewsList extends Component {
                             </li> 
                         )})
                     }
-                </ul>
+                </List>
             </div>
         )
     }

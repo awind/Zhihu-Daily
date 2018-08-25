@@ -7,16 +7,17 @@ import '../css/CommentItem.css'
 class CommentItem extends Component {
 
     render() {
-        const {author, avatar, content, time} = this.props.item 
+        const {author, avatar, content, likes, time} = this.props.item 
         return (
             <div className="comment-container">
                 <Avatar className="avatar" src={filter.replaceUrl(avatar)} alt={author} />
                 <div className="content-container">
                     <div className="author-container">
                         <p className="author">{author}</p>
-                        <IconButton>
-                            <ThumbUpIcon style={{ fontSize: 18 }} color="inherit" aria-label="Thumb Up" />
+                        <IconButton className="thumb">
+                            <ThumbUpIcon style={{ fontSize: 14 }} color="inherit" aria-label="Thumb Up" />
                         </IconButton>
+                        <p style={{ fontSize: 14, marginLeft: 0, paddingLeft: 0 }}>{likes}</p>
                     </div>
                     <p className="content">{content}</p>
                 </div>

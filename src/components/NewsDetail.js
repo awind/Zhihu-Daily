@@ -13,30 +13,22 @@ class NewsDetail extends Component {
         super()
         this.state = {
             detail: '',
+            long_comments: 0,
+            short_comments: 0,
+            popularity: 0,
+            comments: 0,
         }
     }
 
     fetchComments = (id) => {
-        this.props.requestComments()
-        API.getLongComments(id).then((data) => {
-            if (data !== null) {
-                // return type is not array when there is only one comment
-                if (data.comments.constructor === Array) {
-                    this.props.receiveLongComments(data.comments)
-                } else {
-                    this.props.receiveLongComments([data.comments])
-                }
-            }
-        })
-        API.getShortComments(id).then((data) => {
-            if (data !== null) {
-                console.log(data)
-                if (data.comments.constructor === Array) {
-                    this.props.receiveShortComments(data.comments)
-                } else {
-                    this.props.receiveShortComments([data.comments])
-                }
-            }
+        API.getExtraNews(id).then((data) => {
+            console.log(data)
+            this.setState({
+                long_comments: data.long_comments,
+                short_comments: data.short_comments,
+                popularity: data.popularity,
+                comments: data.comments,
+            })
         })
     }
 
@@ -44,15 +36,14 @@ class NewsDetail extends Component {
         const { id } = this.props.match.params
         API.getNewsDetail(id)
             .then(data => {
-                // console.log(data)
+                console.log(data)
                 this.setState({detail: data})
         })
         this.fetchComments(id)
     }
 
     render() {
-        const longCount = this.props.longComments.length
-        const shortCount = this.props.shortComments.length
+        const { popularity, comments } = this.state
 
         const { id, body, css, image, title, image_source } = this.state.detail
         var url = image
@@ -70,7 +61,7 @@ class NewsDetail extends Component {
         const html = '<link rel="stylesheet" type="text/css" href=' + css + ' />' + result
         return (
             <div className="detail-container">
-                <DetailHeader id={id} commentCount={longCount + shortCount}></DetailHeader>
+                <DetailHeader id={id} commentCount={comments} popularity={popularity}></DetailHeader>
                 { body && renderHTML(html) }
                 { image && <div className="header">
                     <img className="detail-image" src={url} alt={title}/>
@@ -83,11 +74,5 @@ class NewsDetail extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        longComments: state.comments.longComments,
-        shortComments: state.comments.shortComments,
-    }
-}
 
-export default connect(mapStateToProps, {requestComments, receiveLongComments, receiveShortComments})(NewsDetail)
+export default NewsDetail

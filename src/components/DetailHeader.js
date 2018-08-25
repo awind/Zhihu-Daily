@@ -72,7 +72,7 @@ class DetailHeader extends Component {
                             </IconButton>
 
                             <IconButton aria-label="Thumb Up" color="inherit" onClick={this.handleOnClickThumbUp}>
-                                <Badge classes={{ badge: classes.badge}}>
+                                <Badge badgeContent={this.props.popularity} classes={{ badge: classes.badge}}>
                                     <ThumbUpIcon />
                                 </Badge>
                             </IconButton>
