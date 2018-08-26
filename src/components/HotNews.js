@@ -45,7 +45,7 @@ class HotNews extends Component {
 
 function mapStateToProps(state) {
     return {
-        topStories: state.news.topStories,
+        topStories: state.topStories,
     }
 }
 

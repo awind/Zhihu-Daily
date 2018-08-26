@@ -48,7 +48,7 @@ class AppHeader extends Component {
         if(index == 0) {
             history.push('/')
         } else {
-            const { themes } = this.props.themes
+            const themes = this.props.themes
             const themeID = themes[index - 1].id
             history.push('/' + themeID)
         }
@@ -56,7 +56,7 @@ class AppHeader extends Component {
 
     render() {
         const { anchorEl } = this.state
-        const { themes } = this.props.themes
+        const themes = this.props.themes
         return (
             <div className="root">
                 <AppBar style={{ backgroundColor: '#0C88EA' }} className="appbar">
@@ -135,8 +135,4 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch)
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppHeader))
+export default withRouter(connect(mapStateToProps)(AppHeader))

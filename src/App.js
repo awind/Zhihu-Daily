@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import NewsList from './components/NewsList'
 import './App.css'
 import AppHeader from './components/AppHeader'
 import * as API from './utils/api'
 import { connect } from 'react-redux'
-import { receiveThemes, requestThemes } from './actions'
-import HotNews from './components/HotNews'
+import { receiveThemes } from './actions'
 import { Route, Switch } from 'react-router-dom'
 import NewsDetail from './components/NewsDetail'
 import { withRouter } from 'react-router'
@@ -16,7 +14,6 @@ import ZhihuNews from './components/ZhihuNews';
 class App extends Component {
 
   componentDidMount() {
-    this.props.requestThemes()
     API.getThemesList().then(data => {
       this.props.receiveThemes(data.others)
     })
@@ -52,4 +49,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps,{requestThemes, receiveThemes})(App))
+export default withRouter(connect(mapStateToProps,{receiveThemes})(App))

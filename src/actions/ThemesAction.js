@@ -1,10 +1,4 @@
-import { REQUEST_THEMES, RECEIVE_THEMES } from './types' 
-
-export function requestThemes() {
-    return {
-        type: REQUEST_THEMES,
-    }
-}
+import { RECEIVE_THEMES } from './types' 
 
 export function receiveThemes(themes) {
     return {

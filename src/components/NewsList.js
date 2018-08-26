@@ -4,7 +4,7 @@ import * as API from '../utils/api'
 import '../css/NewsList.css'
 import { Divider, List, ListSubheader } from '@material-ui/core'
 import { connect } from 'react-redux'
-import { requestNews, receiveNews } from '../actions/NewsAction'
+import { receiveNews } from '../actions/NewsAction'
 
 class NewsList extends Component {
 
@@ -29,8 +29,8 @@ class NewsList extends Component {
 
 function mapStateToProps(state) {
     return {
-        stories: state.news.stories,
+        stories: state.stories,
     }
 }
 
-export default connect(mapStateToProps, {requestNews, receiveNews})(NewsList)
+export default connect(mapStateToProps, {receiveNews})(NewsList)
