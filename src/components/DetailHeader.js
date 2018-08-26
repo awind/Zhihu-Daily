@@ -9,17 +9,7 @@ import CommentIcon from '@material-ui/icons/Comment'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import Badge from '@material-ui/core/Badge'
 import { withRouter } from 'react-router'
-import { withStyles } from '@material-ui/core/styles'
 import '../css/DetailHeader.css'
-
-const styles = theme => ({
-    badge: {
-      top: 1,
-      right: -20,
-      fontSize: 16,
-      // The border color match the background color
-    },
-  });
 
 class DetailHeader extends Component {
 
@@ -66,13 +56,13 @@ class DetailHeader extends Component {
                             </IconButton>
 
                             <IconButton color="inherit" aria-label="Comments" onClick={this.handleOnClickComments}>
-                                <Badge badgeContent={this.props.commentCount} classes={{ badge: classes.badge}}>
+                                <Badge badgeContent={this.props.commentCount}>
                                     <CommentIcon />
                                 </Badge>
                             </IconButton>
 
                             <IconButton aria-label="Thumb Up" color="inherit" onClick={this.handleOnClickThumbUp}>
-                                <Badge badgeContent={this.props.popularity} classes={{ badge: classes.badge}}>
+                                <Badge badgeContent={this.props.popularity}>
                                     <ThumbUpIcon />
                                 </Badge>
                             </IconButton>
@@ -84,4 +74,4 @@ class DetailHeader extends Component {
     }
 }
 
-export default withRouter(withStyles(styles)(DetailHeader))
+export default withRouter(DetailHeader)

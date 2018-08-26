@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions'
+import { withRouter } from 'react-router'
 
 const ITEM_HEIGHT = 36;
 
@@ -24,6 +25,7 @@ class AppHeader extends Component {
     state = {
         open: false,
         anchorEl: null,
+        selected: 0,
     }
 
     toggleDrawer = (open) => () => {
@@ -38,6 +40,18 @@ class AppHeader extends Component {
 
     handleClose = () => {
         this.setState({ anchorEl: null });
+    }
+
+    handleDrawerItemClick = (index) => {
+        this.setState({selected: index})
+        const history = this.props.history
+        if(index == 0) {
+            history.push('/')
+        } else {
+            const { themes } = this.props.themes
+            const themeID = themes[index - 1].id
+            history.push('/' + themeID)
+        }
     }
 
     render() {
@@ -92,12 +106,12 @@ class AppHeader extends Component {
                     <Divider />
                     <div>
                         <List component="nav">
-                            <MenuItem key="0" button selected>
+                            <MenuItem key="0" button selected={this.state.selected == 0} onClick={() => this.handleDrawerItemClick(0)}>
                                 <ListItemText>首页</ListItemText>
                             </MenuItem>
                             { themes && themes.map((item, index) => {
                                 return (
-                                    <MenuItem button key={index + 1}>
+                                    <MenuItem button selected={this.state.selected === (index + 1)} key={index + 1} onClick={() => this.handleDrawerItemClick(index + 1)}>
                                         <ListItemText>{item.name}</ListItemText>
                                         <ListItemIcon>
                                             <AddIcon style={{ color: '#0C88EA' }} />
@@ -125,4 +139,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppHeader)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppHeader))

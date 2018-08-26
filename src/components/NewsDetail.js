@@ -3,8 +3,6 @@ import * as API from '../utils/api'
 import renderHTML from 'react-render-html'
 import DetailHeader from './DetailHeader'
 import filter from '../utils/filter'
-import { connect } from 'react-redux'
-import { requestComments, receiveLongComments, receiveShortComments } from '../actions/CommentsAction'
 import '../css/NewsDetail.css'
 
 class NewsDetail extends Component {
@@ -45,7 +43,7 @@ class NewsDetail extends Component {
     render() {
         const { popularity, comments } = this.state
 
-        const { id, body, css, image, title, image_source } = this.state.detail
+        const { id, body, css, image, title, image_source, share_url } = this.state.detail
         var url = image
         if (image !== undefined) {
             url = filter.replaceUrl(image)
@@ -61,7 +59,7 @@ class NewsDetail extends Component {
         const html = '<link rel="stylesheet" type="text/css" href=' + css + ' />' + result
         return (
             <div className="detail-container">
-                <DetailHeader id={id} commentCount={comments} popularity={popularity}></DetailHeader>
+                <DetailHeader id={id} commentCount={comments} popularity={popularity} shareUrl={share_url}></DetailHeader>
                 { body && renderHTML(html) }
                 { image && <div className="header">
                     <img className="detail-image" src={url} alt={title}/>

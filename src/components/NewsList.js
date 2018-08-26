@@ -8,18 +8,11 @@ import { requestNews, receiveNews } from '../actions/NewsAction'
 
 class NewsList extends Component {
 
-    componentDidMount() {
-        this.props.requestNews()
-        API.fetLatestNews().then(data => {
-            this.props.receiveNews(data.stories, data.top_stories)
-        })
-    }
-
     render() {
         const { stories } = this.props
         return (
             <div className="list-container">
-                <List className="list" subheader={<ListSubheader>每日新闻</ListSubheader>}>
+                <List className="list" subheader={<ListSubheader>{this.props.title}</ListSubheader>}>
                     { stories && stories.map((item, index) => {
                         return (
                             <li key={index}>

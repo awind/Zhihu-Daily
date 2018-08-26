@@ -12,11 +12,14 @@ class NewsItem extends Component {
 
     render() {
         const { title, images } = this.props.news
-        const url = filter.replaceUrl(images)
+        var url = ""
+        if(images !== undefined) {
+            url = filter.replaceUrl(images)
+        }
         return (
             <div className="item-container" onClick={this.handleClickItem}>
                 <p className="item-title">{title}</p>
-                <img src={url} alt={title}></img>
+                { images && <img src={url} alt={title}></img> }
             </div>
         )
     }

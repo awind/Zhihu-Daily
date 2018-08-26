@@ -10,12 +10,14 @@ import { Route, Switch } from 'react-router-dom'
 import NewsDetail from './components/NewsDetail'
 import { withRouter } from 'react-router'
 import CommentsList from './components/CommentsList';
+import ThemeNews from './components/ThemeNews';
+import ZhihuNews from './components/ZhihuNews';
 
 class App extends Component {
 
   componentDidMount() {
     this.props.requestThemes()
-    API.getNewsTheme().then(data => {
+    API.getThemesList().then(data => {
       this.props.receiveThemes(data.others)
     })
   }
@@ -27,8 +29,13 @@ class App extends Component {
           <Route exact path='/' component={() => (
             <div>
               <AppHeader></AppHeader>
-              <HotNews></HotNews>
-              <NewsList></NewsList>
+              <ZhihuNews></ZhihuNews>
+            </div>
+          )}></Route>
+          <Route exact path='/:themeID' component={() => (
+            <div>
+              <AppHeader></AppHeader>
+              <ThemeNews></ThemeNews>
             </div>
           )}></Route>
           <Route exact path='/detail/:id' component={NewsDetail}></Route>

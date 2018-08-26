@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import CommentsHeader from './CommentsHeader';
 import CommentItem from './CommentItem';
-import { connect } from 'react-redux'
 import * as API from '../utils/api'
 import '../css/CommentsList.css'
 import { Divider, Collapse, List, ListItem, ListItemText } from '@material-ui/core';
@@ -74,7 +73,7 @@ class CommentsList extends Component {
                                     </div>)
                             })}
 
-                            { longCount === 0 && <EmptyPlaceholder />}
+                            {/* { longCount === 0 && <EmptyPlaceholder />} */}
                             
                     </List>
                 </List>
@@ -82,7 +81,7 @@ class CommentsList extends Component {
                 <List component="nav" style={{margin: '0', padding: '0'}}>
                     <ListItem button onClick={this.handleOnClickShortComments}>
                         <ListItemText primary={shortTitle} />
-                        {this.state.isShortCommentOpen && this.state.shortComments.length > 0 ? <ExpandLess /> : <div />}
+                        {this.state.isShortCommentOpen && this.state.shortComments.length > 0 ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
 
                     <Collapse in={this.state.isShortCommentOpen} timeout="auto" unmountOnExit>
