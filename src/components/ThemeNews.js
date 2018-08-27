@@ -41,7 +41,7 @@ class ThemeNews extends Component {
         return (
             <div>
                 <div className="image-header">
-                    <img src={url} alt={description}></img>
+                    <img className="cover" src={url} alt={description}></img>
                     <p className="title">{description}</p>
                 </div>
                 { image && <NewsList title={"主编: " + this.state.editor}></NewsList>}

@@ -2,8 +2,9 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 12px 16px;
+    margin: 12px 10px;
     height: 100px;
+    max-width: 100%;
 }
 
 .item-title {

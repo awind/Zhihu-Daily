@@ -8,9 +8,7 @@ import '../css/AppHeader.css'
 import { Drawer, Divider, Avatar, Menu, MenuItem, ListItemText, ListItemIcon, List } from '@material-ui/core'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import AddIcon from '@material-ui/icons/Add'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actionCreators from '../actions'
 import { withRouter } from 'react-router'
 
 const ITEM_HEIGHT = 36;

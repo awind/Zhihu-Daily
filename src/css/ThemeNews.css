@@ -4,6 +4,13 @@
     margin-bottom: 0;
     padding: 0;
     height: 40vh;
+    max-width: 100%;
+}
+
+.cover {
+    height: 40vh;
+    max-width: 100vw;
+    object-fit: cover;
 }
 
 .title {
