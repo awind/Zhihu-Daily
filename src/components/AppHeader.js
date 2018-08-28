@@ -9,6 +9,7 @@ import { Drawer, Divider, Avatar, Menu, MenuItem, ListItemText, ListItemIcon, Li
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import AddIcon from '@material-ui/icons/Add'
 import { connect } from 'react-redux'
+import { receiveThemeIndex } from '../actions'
 import { withRouter } from 'react-router'
 
 const ITEM_HEIGHT = 36;
@@ -23,7 +24,6 @@ class AppHeader extends Component {
     state = {
         open: false,
         anchorEl: null,
-        selected: 0,
     }
 
     toggleDrawer = (open) => () => {
@@ -41,9 +41,9 @@ class AppHeader extends Component {
     }
 
     handleDrawerItemClick = (index) => {
-        this.setState({selected: index})
+        this.props.receiveThemeIndex(index)
         const history = this.props.history
-        if(index == 0) {
+        if(index === 0) {
             history.push('/')
         } else {
             const themes = this.props.themes
@@ -55,6 +55,11 @@ class AppHeader extends Component {
     render() {
         const { anchorEl } = this.state
         const themes = this.props.themes
+        const selectedIndex = this.props.index
+        var title = "首页"
+        if (themes.length > 0 && selectedIndex !== 0) {
+            title = themes[selectedIndex - 1].name
+        }
         return (
             <div className="root">
                 <AppBar style={{ backgroundColor: '#0C88EA' }} className="appbar">
@@ -63,7 +68,7 @@ class AppHeader extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography className="flex" variant="title" color="inherit">
-                            首页
+                            {title}
                         </Typography>
                         <IconButton color="inherit">
                             <MoreVertIcon
@@ -104,12 +109,12 @@ class AppHeader extends Component {
                     <Divider />
                     <div>
                         <List component="nav">
-                            <MenuItem key="0" button selected={this.state.selected == 0} onClick={() => this.handleDrawerItemClick(0)}>
+                            <MenuItem key="0" button selected={selectedIndex === 0} onClick={() => this.handleDrawerItemClick(0)}>
                                 <ListItemText>首页</ListItemText>
                             </MenuItem>
                             { themes && themes.map((item, index) => {
                                 return (
-                                    <MenuItem button selected={this.state.selected === (index + 1)} key={index + 1} onClick={() => this.handleDrawerItemClick(index + 1)}>
+                                    <MenuItem button selected={selectedIndex === (index + 1)} key={index + 1} onClick={() => this.handleDrawerItemClick(index + 1)}>
                                         <ListItemText>{item.name}</ListItemText>
                                         <ListItemIcon>
                                             <AddIcon style={{ color: '#0C88EA' }} />
@@ -130,7 +135,8 @@ class AppHeader extends Component {
 function mapStateToProps(state) {
     return {
         themes: state.themes,
+        index: state.index,
     }
 }
 
-export default withRouter(connect(mapStateToProps)(AppHeader))
+export default withRouter(connect(mapStateToProps, { receiveThemeIndex })(AppHeader))

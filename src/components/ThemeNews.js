@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NewsList from './NewsList'
 import * as API from '../utils/api'
-import { receiveNews } from '../actions/NewsAction'
+import { receiveNews } from '../actions'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import '../css/ThemeNews.css'
@@ -14,26 +14,32 @@ class ThemeNews extends Component {
         this.state = {
             image: "",
             description: "",
-            editor: "",
+            editors: [],
         }
     }
 
     componentDidMount() {
         const { themeID } = this.props.match.params
         API.getThemeNews(themeID).then(data => {
-            console.log(data.editors.name)
+            console.log(data.editors)
+            var editors = []
+            if (data.editors.constructor === Array) {
+                editors = data.editors
+            } else {
+                editors = [data.editors]
+            }
             this.setState({
                     image: data.image, 
                     description: data.description,
-                    editor: data.editors.name,
+                    editors: editors,
             })
             this.props.receiveNews(data.stories, [])
+            console.log(this.state.editors)
         })
     }
 
     render() {
         const { image, description } = this.state
-        console.log(description)
         var url = ""
         if (image !== undefined) {
             url = filter.replaceUrl(image)
@@ -44,7 +50,7 @@ class ThemeNews extends Component {
                     <img className="cover" src={url} alt={description}></img>
                     <p className="title">{description}</p>
                 </div>
-                { image && <NewsList title={"主编: " + this.state.editor}></NewsList>}
+                { image && <NewsList editors={this.state.editors}></NewsList>}
             </div>
         )
     }

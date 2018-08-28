@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import HotNews from './HotNews'
 import NewsList from './NewsList'
 import { connect } from 'react-redux'
-import { receiveNews } from '../actions/NewsAction'
+import { receiveNews } from '../actions'
 import * as API from '../utils/api'
 
 class ZhihuNews extends Component {

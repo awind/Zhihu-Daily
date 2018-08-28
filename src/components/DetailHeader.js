@@ -37,7 +37,6 @@ class DetailHeader extends Component {
     }
 
     render() {
-        const { classes } = this.props
         return (
             <div className="root">
                 <AppBar style={{ backgroundColor: '#0C88EA' }}>

@@ -9,3 +9,19 @@
     margin: 0;
     padding: 0;
 }
+
+.avatar {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.list-header {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    height: 30px;
+}

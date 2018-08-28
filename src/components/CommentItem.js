@@ -7,7 +7,7 @@ import '../css/CommentItem.css'
 class CommentItem extends Component {
 
     render() {
-        const {author, avatar, content, likes, time} = this.props.item 
+        const { author, avatar, content, likes } = this.props.item 
         return (
             <div className="comment-container">
                 <Avatar className="avatar" src={filter.replaceUrl(avatar)} alt={author} />

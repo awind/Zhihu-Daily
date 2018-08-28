@@ -6,7 +6,6 @@ import '../css/CommentsList.css'
 import { Divider, Collapse, List, ListItem, ListItemText } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import EmptyPlaceholder from './EmptyPlaceholder'
 
 class CommentsList extends Component {
 
@@ -72,9 +71,6 @@ class CommentsList extends Component {
                                     <Divider />
                                     </div>)
                             })}
-
-                            {/* { longCount === 0 && <EmptyPlaceholder />} */}
-                            
                     </List>
                 </List>
 
