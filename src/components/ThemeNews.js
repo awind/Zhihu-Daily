@@ -21,7 +21,6 @@ class ThemeNews extends Component {
     componentDidMount() {
         const { themeID } = this.props.match.params
         API.getThemeNews(themeID).then(data => {
-            console.log(data.editors)
             var editors = []
             if (data.editors.constructor === Array) {
                 editors = data.editors
@@ -29,13 +28,18 @@ class ThemeNews extends Component {
                 editors = [data.editors]
             }
             this.setState({
-                    image: data.image, 
-                    description: data.description,
-                    editors: editors,
+                image: data.image, 
+                description: data.description,
+                editors: editors,
             })
             this.props.receiveNews(data.stories, [])
-            console.log(this.state.editors)
         })
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
     }
 
     render() {
