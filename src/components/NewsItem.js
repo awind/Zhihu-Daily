@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../css/NewsItem.css'
 import filter from '../utils/filter'
 import { withRouter } from 'react-router'
+import { Card } from '@material-ui/core';
 
 class NewsItem extends Component {
 
@@ -17,10 +18,10 @@ class NewsItem extends Component {
             url = filter.replaceUrl(images)
         }
         return (
-            <div className="item-container" onClick={this.handleClickItem}>
+            <Card className="card" onClick={this.handleClickItem}>
                 <p className="item-title">{title}</p>
                 { images && <img src={url} alt={title}></img> }
-            </div>
+            </Card>
         )
     }
 }

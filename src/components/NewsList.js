@@ -10,13 +10,12 @@ class NewsList extends Component {
 
     render() {
         const { stories } = this.props
-        console.log(this.props.editors)
         return (
-            <div className="list-container">
+            <div className="container">
                 <List className="list" subheader={<ListSubheader>
                 {this.props.editors && (
-                    <table className="list-header">
-                        <th>主编: </th>
+                    <table>
+                        <td>主编</td>
                         {this.props.editors.map((item, index) => {
                             var url = ""
                             const { name, avatar } = item
@@ -24,9 +23,9 @@ class NewsList extends Component {
                                 url = filter.replaceUrl(avatar)
                             }
                             return (
-                                <th key={index}>
-                                    <img className="avatar" src={url} alt={name}></img>
-                                </th>
+                                <td align="center" key={index}>
+                                    <img src={url} alt={name}></img>
+                                </td>
                             )
                     })}
                     </table>
@@ -42,7 +41,6 @@ class NewsList extends Component {
                         return (
                             <li key={index}>
                                 <NewsItem news={item} />
-                                <Divider />
                             </li> 
                         )})
                     }

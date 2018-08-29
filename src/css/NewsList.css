@@ -1,6 +1,7 @@
-.list-container {
+.container {
     margin: 0;
     padding: 0;
+    background-color: #F3F3F3;
 }
 
 .list {
@@ -10,18 +11,32 @@
     padding: 0;
 }
 
-.avatar {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    padding: 0;
-    margin: 0 auto;
+td {
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
 }
 
-.list-header {
+td img{
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0 4px;
+    margin: 0;
+}
+
+table {
+    display: block;
     text-align: center;
     padding: 0;
     margin: 0;
-    height: 30px;
+    height: 48px;
+    overflow-y: hidden;
+}
+
+div p {
+    padding: 0 0;
+    margin: 0;
 }
