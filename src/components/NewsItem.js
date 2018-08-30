@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../css/NewsItem.css'
 import filter from '../utils/filter'
 import { withRouter } from 'react-router'
-import { Card } from '@material-ui/core';
+import { Card } from '@material-ui/core'
 
 class NewsItem extends Component {
 
@@ -19,8 +19,12 @@ class NewsItem extends Component {
         }
         return (
             <Card className="card" onClick={this.handleClickItem}>
-                <p className="item-title">{title}</p>
-                { images && <img src={url} alt={title}></img> }
+                <div className="content">
+                    <p className="item-title">{title}</p>
+                    <div className="img-container">
+                        { images && <img src={url} alt={title}></img> }
+                    </div>
+                </div>
             </Card>
         )
     }

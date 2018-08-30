@@ -1,11 +1,32 @@
 .card {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 10px 8px;
+    margin: 10px 24px;
     height: 100px;
-    max-width: 100%;
 }
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+/* for mobile */
+@media screen and (max-width: 540px) {
+    .content {
+        width: 100%;
+    }
+
+    .card {
+        margin: 10px 8px;
+    }
+}
+
+/* For Tablets */
+@media screen and (min-width: 540px) and (max-width: 780px) {
+    
+}
+
 
 .item-title {
     flex: 4;
@@ -15,10 +36,14 @@
     white-space: pre-wrap;
 }
 
-img {
+.img-container {
     flex: 2;
+}
+
+img {
     padding: 0;
-    height: 70%;
+    height: 68px;
+    width: 68px;
     object-fit: contain;
-    background-size: contain;
+    overflow: hidden;
 }
