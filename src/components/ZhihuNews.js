@@ -2,25 +2,30 @@ import React, { Component } from 'react'
 import HotNews from './HotNews'
 import NewsList from './NewsList'
 import { connect } from 'react-redux'
-import { receiveNews } from '../actions'
-import * as API from '../utils/api'
+import { fetchNews } from '../actions'
+import {getCurrentDate} from '../utils/date'
 
 class ZhihuNews extends Component {
 
     componentDidMount() {
-        API.fetLatestNews().then(data => {
-            this.props.receiveNews(data.stories, data.top_stories)
-        })
+        const date = getCurrentDate()
+        this.props.getNews(date)
     }
 
     render() {
         return (
             <div>
               <HotNews></HotNews>
-              <NewsList title="每日新闻"></NewsList>
+              <NewsList></NewsList>
             </div>
         )
     }
 }
 
-export default connect(null, { receiveNews })(ZhihuNews)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getNews: (date) => dispatch(fetchNews(date))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ZhihuNews)

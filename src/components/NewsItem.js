@@ -22,7 +22,7 @@ class NewsItem extends Component {
                 <div className="content">
                     <p className="item-title">{title}</p>
                     <div className="img-container">
-                        { images && <img src={url} alt={title}></img> }
+                        { images && <img className="img-item" src={url} alt={title}></img> }
                     </div>
                 </div>
             </Card>

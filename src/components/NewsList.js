@@ -3,50 +3,47 @@ import NewsItem from './NewsItem'
 import '../css/NewsList.css'
 import { List, ListSubheader } from '@material-ui/core'
 import { connect } from 'react-redux'
-import { receiveNews } from '../actions'
+import { receiveNews, fetchNews } from '../actions'
 import filter from '../utils/filter'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { getCurrentDate } from '../utils/date'
 
 class NewsList extends Component {
 
+    fetchNews = () => {
+        this.props.getNews('20180830')
+    }
+
     render() {
         const { stories } = this.props
+        const currDate = getCurrentDate()
+
         return (
             <div className="container">
-                <List className="list" subheader={<ListSubheader>
-                {this.props.editors && (
-                    <table>
-                        <tbody><tr>
-                            <td>主编</td>
-                            {this.props.editors.map((item, index) => {
-                                var url = ""
-                                const { name, avatar } = item
-                                if (avatar !== undefined) {
-                                    url = filter.replaceUrl(avatar)
-                                }
-                                return (
-                                    <td align="center" key={index}>
-                                        <img src={url} alt={name}></img>
-                                    </td>
-                                )
-                            })}
-                    </tr></tbody>
-                    </table>
-                )}
-                {
-                    !this.props.editors && (
-                        <p>{this.props.title}</p>
-                    )
-                }
-                
-                </ListSubheader>}>
-                    { stories && stories.map((item, index) => {
-                        return (
-                            <li key={index}>
-                                <NewsItem news={item} />
-                            </li> 
-                        )})
-                    }
-                </List>
+                <InfiniteScroll
+                    dataLength={stories.length}
+                    next={this.fetchNews}
+                    hasMore={true}
+                >
+                    <List className="list" subheader={<li />}>
+                        {
+                            Object.keys(stories).map(date => (
+                                <li key={date}>
+                                    <ul>
+                                        <ListSubheader>{ currDate === date ? "今日新闻" : date}</ListSubheader>
+                                        { stories[date] && stories[date].map((item, index) => {
+                                            return (
+                                                <li key={index}>
+                                                    <NewsItem news={item} />
+                                                </li> 
+                                            )})
+                                        }
+                                    </ul>
+                                </li>
+                            ))
+                        }
+                    </List>
+                </InfiniteScroll>
             </div>
         )
     }
@@ -58,4 +55,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {receiveNews})(NewsList)
+function mapDispatchToProps(dispatch) {
+    return {
+        getNews: (date) => dispatch(fetchNews(date))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsList)

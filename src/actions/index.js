@@ -1,8 +1,11 @@
 import { RECEIVE_NEWS, RECEIVE_THEMES, RECEIVE_THEME_INDEX } from './types' 
+import * as API from '../utils/api'
+import { getCurrentDate } from '../utils/date'
 
-function receiveNews(stories, topStories) {
+function receiveNews(date, stories, topStories) {
     return {
         type: RECEIVE_NEWS,
+        date,
         stories,
         topStories,
     }
@@ -23,8 +26,34 @@ function receiveThemeIndex(index) {
     }
 }
 
+function fetchNews(date) {
+    const currDate = getCurrentDate()
+    return (dispatch) => {
+        if (date === currDate) {
+            API.getLatestNews().then(data => {
+                console.log(data)
+                dispatch(receiveNews(date , data.stories, data.top_stories))
+            })
+        } else {
+            API.getNewsBefore(date).then(data => {
+                dispatch(receiveNews(date, data.stories, []))
+            })
+        }
+
+
+    }
+}
+
+function fetchThemeNews(date) {
+    return (dispatch) => {
+
+    }
+}
+
 export {
     receiveNews,
     receiveThemes,
     receiveThemeIndex,
+    fetchNews,
+    fetchThemeNews,
 }

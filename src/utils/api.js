@@ -7,6 +7,7 @@ const NEWS_EXTRA = 'https://news-at.zhihu.com/api/4/story-extra/{id}'
 const NEWS_BEFORE = 'https://news-at.zhihu.com/api/4/news/before/{date}'
 const THEMES_LIST = 'https://news-at.zhihu.com/api/4/themes'
 const THEME_NEWS = 'https://news-at.zhihu.com/api/4/theme/{id}'
+const THEME_NEWS_BEFORE = 'https://news-at.zhihu.com/api/4/theme/{id}/before/{date}'
 const COMMENTS_LONG = 'https://news-at.zhihu.com/api/4/story/{id}/long-comments'
 const COMMENTS_SHORT = 'https://news-at.zhihu.com/api/4/story/{id}/short-comments'
 
@@ -16,10 +17,11 @@ export const NEWS_EXTRA_API = `${YAHOO_PROXY_BASE}${NEWS_EXTRA}${YAHOO_PROXY_SUF
 export const NEWS_BEFORE_API = `${YAHOO_PROXY_BASE}${NEWS_BEFORE}${YAHOO_PROXY_SUFFIX}`
 export const THEMES_LIST_API = `${YAHOO_PROXY_BASE}${THEMES_LIST}${YAHOO_PROXY_SUFFIX}`
 export const THEME_NEWS_API = `${YAHOO_PROXY_BASE}${THEME_NEWS}${YAHOO_PROXY_SUFFIX}`
+export const THEME_NEWS_BEFORE_API = `${YAHOO_PROXY_BASE}${THEME_NEWS_BEFORE}${YAHOO_PROXY_SUFFIX}`
 export const COMMENTS_LONG_API = `${YAHOO_PROXY_BASE}${COMMENTS_LONG}${YAHOO_PROXY_SUFFIX}`
 export const COMMENTS_SHORT_API = `${YAHOO_PROXY_BASE}${COMMENTS_SHORT}${YAHOO_PROXY_SUFFIX}`
 
-export const fetLatestNews = () => 
+export const getLatestNews = () => 
     fetch(NEWS_API)
         .then(res => res.json()).then(data => data.query.results.json)
 
@@ -41,6 +43,10 @@ export const getThemesList = () =>
 
 export const getThemeNews = (id) => 
     fetch(THEME_NEWS_API.replace('{id}', id))
+        .then(res => res.json()).then(data => data.query.results.json)
+
+export const getThemeNewsBefore = (id, date) => 
+    fetch(THEME_NEWS_BEFORE_API.replace('{id}', id).replace('{date}', date))
         .then(res => res.json()).then(data => data.query.results.json)
 
 export const getLongComments = (id) => 

@@ -8,13 +8,14 @@ import { Provider } from 'react-redux'
 import logger from 'redux-logger'
 import createBrowserHistory from 'history/createBrowserHistory'
 import rootReducer from './reducers'
+import thunk from 'redux-thunk'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
     rootReducer, 
     composeEnhancers(
-        applyMiddleware(logger)
+        applyMiddleware(thunk, logger)
     )
 )
 
