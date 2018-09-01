@@ -1,4 +1,4 @@
-import { RECEIVE_NEWS, RECEIVE_THEME_NEWS, RECEIVE_THEMES, RECEIVE_THEME_INDEX } from './types' 
+import { RECEIVE_NEWS, RECEIVE_THEME_NEWS, RECEIVE_THEMES, RECEIVE_THEME_INDEX, LOAD_MORE_THEME_NEWS } from './types' 
 import * as API from '../utils/api'
 import { today } from '../utils/date'
 
@@ -18,6 +18,13 @@ function receiveThemeNews(themeStories, image, description, editors) {
         image,
         description,
         editors,
+    }
+}
+
+function loadMoreThemeNews(themeStories) {
+    return {
+        type: LOAD_MORE_THEME_NEWS,
+        themeStories
     }
 }
 
@@ -64,7 +71,7 @@ function fetchThemeNews(themeID, storyID) {
             })
         } else {
             API.getThemeNewsBefore(themeID, storyID).then(data => {
-                dispatch(receiveThemeNews(data.stories, "", "", []))
+                dispatch(loadMoreThemeNews(data.stories))
             })
         }
     }

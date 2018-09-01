@@ -29,7 +29,7 @@ class App extends Component {
               <ZhihuNews></ZhihuNews>
             </div>
           )}></Route>
-          <Route exact path='/:themeID' render={() => (
+          <Route exact path='/:themeID' component={() => (
             <div>
               <AppHeader></AppHeader>
               <ThemeNews></ThemeNews>

@@ -5,7 +5,6 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import '../css/ThemeNews.css'
 import filter from '../utils/filter' 
-import { today } from '../utils/date'
 
 class ThemeNews extends Component {
 
