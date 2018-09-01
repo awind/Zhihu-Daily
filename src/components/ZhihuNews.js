@@ -3,12 +3,13 @@ import HotNews from './HotNews'
 import NewsList from './NewsList'
 import { connect } from 'react-redux'
 import { fetchNews } from '../actions'
-import {getCurrentDate} from '../utils/date'
+import { today } from '../utils/date'
 
 class ZhihuNews extends Component {
 
     componentDidMount() {
-        const date = getCurrentDate()
+        console.log('componentDidMount')
+        const date = today()
         this.props.getNews(date)
     }
 

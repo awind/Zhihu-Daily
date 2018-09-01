@@ -3,34 +3,42 @@ import NewsItem from './NewsItem'
 import '../css/NewsList.css'
 import { List, ListSubheader } from '@material-ui/core'
 import { connect } from 'react-redux'
-import { receiveNews, fetchNews } from '../actions'
-import filter from '../utils/filter'
+import { fetchNews } from '../actions'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { getCurrentDate } from '../utils/date'
+import { today, yesterday, formatDate } from '../utils/date'
+import moment from 'moment'
 
 class NewsList extends Component {
 
     fetchNews = () => {
-        this.props.getNews('20180830')
+        const stories = this.props.stories
+        const keys = Object.keys(stories).sort()
+        if (keys.length > 0) {
+            const prevDate = yesterday(keys[0])
+            this.props.getNews(prevDate)
+        }
     }
 
     render() {
         const { stories } = this.props
-        const currDate = getCurrentDate()
-
+        const currDate = today()
+        var storyCount = 0
+        for (var key in stories) {
+            const item = stories[key]
+            storyCount += item.length
+        }
         return (
             <div className="container">
                 <InfiniteScroll
-                    dataLength={stories.length}
+                    dataLength={storyCount}
                     next={this.fetchNews}
-                    hasMore={true}
-                >
+                    hasMore={true} >
                     <List className="list" subheader={<li />}>
                         {
-                            Object.keys(stories).map(date => (
+                            Object.keys(stories).sort().reverse().map(date => (
                                 <li key={date}>
                                     <ul>
-                                        <ListSubheader>{ currDate === date ? "今日新闻" : date}</ListSubheader>
+                                        <ListSubheader>{ currDate === date ? "今日新闻" : formatDate(date)}</ListSubheader>
                                         { stories[date] && stories[date].map((item, index) => {
                                             return (
                                                 <li key={index}>

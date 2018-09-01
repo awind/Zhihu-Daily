@@ -1,16 +1,15 @@
-export function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+import moment from 'moment'
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('');
+export function today() {
+    const currentDate = new Date()
+    return moment(currentDate).format('YYYYMMDD')
 }
 
-export function getCurrentDate() {
-    const currentDate = new Date()
-    return formatDate(currentDate)
+export function yesterday(date) {
+    const prevDate = moment(date, 'YYYYMMDD').subtract(1, 'day')
+    return prevDate.format('YYYYMMDD')
+}
+
+export function formatDate(date) {
+    return moment(date).format('MMM Do dddd')
 }

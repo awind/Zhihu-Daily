@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NewsList from './NewsList'
+import ThemeNewsList from './ThemeNewsList'
 import * as API from '../utils/api'
 import { receiveNews } from '../actions'
 import { withRouter } from 'react-router'
@@ -32,7 +32,7 @@ class ThemeNews extends Component {
                 description: data.description,
                 editors: editors,
             })
-            this.props.receiveNews(data.stories, [])
+            //this.props.receiveNews("20180901", data.stories, [])
         })
     }
 
@@ -54,7 +54,7 @@ class ThemeNews extends Component {
                     <img className="cover" src={url} alt={description}></img>
                     <p className="title">{description}</p>
                 </div>
-                { image && <NewsList editors={this.state.editors}></NewsList>}
+                { image && <ThemeNewsList editors={this.state.editors}></ThemeNewsList>}
             </div>
         )
     }

@@ -10,10 +10,13 @@ import { withRouter } from 'react-router'
 import CommentsList from './components/CommentsList';
 import ThemeNews from './components/ThemeNews';
 import ZhihuNews from './components/ZhihuNews';
+import moment from 'moment';
+import localization from 'moment/locale/zh-cn'
 
 class App extends Component {
 
   componentDidMount() {
+    moment().locale('zh-cn', localization)
     API.getThemesList().then(data => {
       this.props.receiveThemes(data.others)
     })
@@ -23,13 +26,13 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path='/' component={() => (
+          <Route exact path='/' render={() => (
             <div>
               <AppHeader></AppHeader>
               <ZhihuNews></ZhihuNews>
             </div>
           )}></Route>
-          <Route exact path='/:themeID' component={() => (
+          <Route exact path='/:themeID' render={() => (
             <div>
               <AppHeader></AppHeader>
               <ThemeNews></ThemeNews>

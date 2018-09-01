@@ -9,7 +9,6 @@ const initState = {
 }
 
 function zhihuDaily(state = initState, action) {
-    const date = action.date
     switch(action.type) {
         case RECEIVE_NEWS:
             return Object.assign({}, state, {
@@ -17,7 +16,10 @@ function zhihuDaily(state = initState, action) {
                     ...state.stories,
                     [action.date]: action.stories
                 },
-                topStories: action.topStories
+                topStories: [
+                    ...state.topStories,
+                    ...action.topStories
+                ]
             })
         case RECEIVE_THEMES:
             return Object.assign({}, state, {
