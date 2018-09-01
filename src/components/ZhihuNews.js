@@ -8,7 +8,6 @@ import { today } from '../utils/date'
 class ZhihuNews extends Component {
 
     componentDidMount() {
-        console.log('componentDidMount')
         const date = today()
         this.props.getNews(date)
     }

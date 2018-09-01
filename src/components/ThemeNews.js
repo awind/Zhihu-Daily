@@ -1,39 +1,17 @@
 import React, { Component } from 'react'
 import ThemeNewsList from './ThemeNewsList'
-import * as API from '../utils/api'
-import { receiveNews } from '../actions'
+import { fetchThemeNews } from '../actions'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import '../css/ThemeNews.css'
 import filter from '../utils/filter' 
+import { today } from '../utils/date'
 
 class ThemeNews extends Component {
 
-    constructor() {
-        super()
-        this.state = {
-            image: "",
-            description: "",
-            editors: [],
-        }
-    }
-
     componentDidMount() {
         const { themeID } = this.props.match.params
-        API.getThemeNews(themeID).then(data => {
-            var editors = []
-            if (data.editors.constructor === Array) {
-                editors = data.editors
-            } else {
-                editors = [data.editors]
-            }
-            this.setState({
-                image: data.image, 
-                description: data.description,
-                editors: editors,
-            })
-            //this.props.receiveNews("20180901", data.stories, [])
-        })
+        this.props.fetchThemeNews(themeID, "")
     }
 
     componentWillUnmount() {
@@ -43,7 +21,8 @@ class ThemeNews extends Component {
     }
 
     render() {
-        const { image, description } = this.state
+        const { themeID } = this.props.match.params
+        const { image, description, editors } = this.props.themeNews
         var url = ""
         if (image !== undefined) {
             url = filter.replaceUrl(image)
@@ -54,10 +33,22 @@ class ThemeNews extends Component {
                     <img className="cover" src={url} alt={description}></img>
                     <p className="title">{description}</p>
                 </div>
-                { image && <ThemeNewsList editors={this.state.editors}></ThemeNewsList>}
+                <ThemeNewsList themeID={themeID} editors={editors}></ThemeNewsList>
             </div>
         )
     }
 }
 
-export default withRouter(connect(null, {receiveNews})(ThemeNews))
+function mapStateToProps(state) {
+    return {
+        themeNews: state.themeNews,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchThemeNews: (id, date) => dispatch(fetchThemeNews(id, date))
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ThemeNews))

@@ -3,33 +3,33 @@ import NewsItem from './NewsItem'
 import '../css/NewsList.css'
 import { List, ListSubheader } from '@material-ui/core'
 import { connect } from 'react-redux'
-import { fetchNews } from '../actions'
+import { fetchThemeNews } from '../actions'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { today, yesterday } from '../utils/date'
 import filter from '../utils/filter'
-import moment from 'moment'
 
 class ThemeNewsList extends Component {
 
     fetchNews = () => {
-        const stories = this.props.stories
-        const keys = Object.keys(stories).sort()
-        if (keys.length > 0) {
-            const prevDate = moment(keys[0], 'YYYYMMDD').subtract(1, 'day').format('YYYYMMDD')
-            console.log(prevDate)
-            this.props.getNews(prevDate)
+        const { themeStories } = this.props.themeNews
+        const themeID = this.props.themeID
+        // last element in list
+        const lastID = themeStories.slice(-1)[0].id
+
+        if (lastID) {
+            this.props.getThemeNews(themeID, lastID)
         }
     }
 
     render() {
-        const { stories } = this.props
-        const currDate = today()
-
+        const { themeStories } = this.props.themeNews
+        // const storyList = themeStories.sort((a, b) => {
+        //     return a.id < b.id
+        // })
+        const themeStoryCount = themeStories.length
         return (
             <div className="container">
                 <InfiniteScroll
-                // todo  dataLength needs to update
-                    dataLength={stories.length}
+                    dataLength={themeStoryCount}
                     next={this.fetchNews}
                     hasMore={true}
                 >
@@ -54,30 +54,15 @@ class ThemeNewsList extends Component {
                             </tr></tbody>
                             </table>
                         )}
-                        {
-                            !this.props.editors && (
-                                <p>{this.props.title}</p>
-                            )
-                        }
-                        
                         </ListSubheader>
                     }>
-                        {
-                            Object.keys(stories).sort().reverse().map(date => (
-                                <li key={date}>
-                                    <ul>
-                                        <ListSubheader>{ currDate === date ? "今日新闻" : moment(date).format('MMM Do dddd')}</ListSubheader>
-                                        { stories[date] && stories[date].map((item, index) => {
+                        { themeStories && themeStories.map((item, index) => {
                                             return (
                                                 <li key={index}>
                                                     <NewsItem news={item} />
                                                 </li> 
                                             )})
                                         }
-                                    </ul>
-                                </li>
-                            ))
-                        }
                     </List>
                 </InfiniteScroll>
             </div>
@@ -87,13 +72,13 @@ class ThemeNewsList extends Component {
 
 function mapStateToProps(state) {
     return {
-        stories: state.stories,
+        themeNews: state.themeNews,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getNews: (date) => dispatch(fetchNews(date))
+        getThemeNews: (id, date) => dispatch(fetchThemeNews(id, date))
     }
 }
 

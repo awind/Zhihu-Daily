@@ -1,4 +1,7 @@
 import moment from 'moment'
+import localization from 'moment/locale/zh-cn'
+
+moment().locale('zh-cn', localization)
 
 export function today() {
     const currentDate = new Date()

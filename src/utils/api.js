@@ -7,7 +7,7 @@ const NEWS_EXTRA = 'https://news-at.zhihu.com/api/4/story-extra/{id}'
 const NEWS_BEFORE = 'https://news-at.zhihu.com/api/4/news/before/{date}'
 const THEMES_LIST = 'https://news-at.zhihu.com/api/4/themes'
 const THEME_NEWS = 'https://news-at.zhihu.com/api/4/theme/{id}'
-const THEME_NEWS_BEFORE = 'https://news-at.zhihu.com/api/4/theme/{id}/before/{date}'
+const THEME_NEWS_BEFORE = 'https://news-at.zhihu.com/api/4/theme/{theme_id}/before/{story_id}'
 const COMMENTS_LONG = 'https://news-at.zhihu.com/api/4/story/{id}/long-comments'
 const COMMENTS_SHORT = 'https://news-at.zhihu.com/api/4/story/{id}/short-comments'
 
@@ -46,7 +46,7 @@ export const getThemeNews = (id) =>
         .then(res => res.json()).then(data => data.query.results.json)
 
 export const getThemeNewsBefore = (id, date) => 
-    fetch(THEME_NEWS_BEFORE_API.replace('{id}', id).replace('{date}', date))
+    fetch(THEME_NEWS_BEFORE_API.replace('{theme_id}', id).replace('{story_id}', date))
         .then(res => res.json()).then(data => data.query.results.json)
 
 export const getLongComments = (id) => 

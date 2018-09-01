@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { fetchNews } from '../actions'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { today, yesterday, formatDate } from '../utils/date'
-import moment from 'moment'
 
 class NewsList extends Component {
 

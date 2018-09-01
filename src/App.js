@@ -7,16 +7,13 @@ import { receiveThemes } from './actions'
 import { Route, Switch } from 'react-router-dom'
 import NewsDetail from './components/NewsDetail'
 import { withRouter } from 'react-router'
-import CommentsList from './components/CommentsList';
-import ThemeNews from './components/ThemeNews';
-import ZhihuNews from './components/ZhihuNews';
-import moment from 'moment';
-import localization from 'moment/locale/zh-cn'
+import CommentsList from './components/CommentsList'
+import ThemeNews from './components/ThemeNews'
+import ZhihuNews from './components/ZhihuNews'
 
 class App extends Component {
 
   componentDidMount() {
-    moment().locale('zh-cn', localization)
     API.getThemesList().then(data => {
       this.props.receiveThemes(data.others)
     })
