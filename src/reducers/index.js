@@ -1,4 +1,4 @@
-import { RECEIVE_NEWS, RECEIVE_THEME_INDEX, RECEIVE_THEMES, RECEIVE_THEME_NEWS, LOAD_MORE_THEME_NEWS } from '../actions/types'
+import { RECEIVE_NEWS, LOAD_MORE_NEWS, RECEIVE_THEME_INDEX, RECEIVE_THEMES, RECEIVE_THEME_NEWS, LOAD_MORE_THEME_NEWS } from '../actions/types'
 
 const initState = {
     index: 0, // drawer selected index
@@ -25,6 +25,13 @@ function zhihuDaily(state = initState, action) {
                     ...state.topStories,
                     ...action.topStories
                 ]
+            })
+        case LOAD_MORE_NEWS:
+            return Object.assign({}, state, {
+                stories: {
+                    ...state.stories,
+                    [action.date]: action.stories,
+                }
             })
         case RECEIVE_THEMES:
             return Object.assign({}, state, {

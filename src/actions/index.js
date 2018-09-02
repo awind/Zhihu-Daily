@@ -1,4 +1,4 @@
-import { RECEIVE_NEWS, RECEIVE_THEME_NEWS, RECEIVE_THEMES, RECEIVE_THEME_INDEX, LOAD_MORE_THEME_NEWS } from './types' 
+import { RECEIVE_NEWS, RECEIVE_THEME_NEWS, LOAD_MORE_NEWS, RECEIVE_THEMES, RECEIVE_THEME_INDEX, LOAD_MORE_THEME_NEWS } from './types' 
 import * as API from '../utils/api'
 import { today } from '../utils/date'
 
@@ -8,6 +8,14 @@ function receiveNews(date, stories, topStories) {
         date,
         stories,
         topStories,
+    }
+}
+
+function loadMoreNews(date, stories) {
+    return {
+        type: LOAD_MORE_NEWS,
+        date,
+        stories
     }
 }
 
@@ -51,7 +59,7 @@ function fetchNews(date) {
             })
         } else {
             API.getNewsBefore(date).then(data => {
-                dispatch(receiveNews(date, data.stories, []))
+                dispatch(loadMoreNews(date, data.stories))
             })
         }
     }
@@ -79,6 +87,7 @@ function fetchThemeNews(themeID, storyID) {
 
 export {
     receiveNews,
+    loadMoreNews,
     receiveThemes,
     receiveThemeNews,
     receiveThemeIndex,
