@@ -32,7 +32,6 @@ class CommentsList extends Component {
         })
         API.getShortComments(id).then((data) => {
             if (data !== null) {
-                console.log(data)
                 if (data.comments.constructor === Array) {
                     this.setState({shortComments: data.comments})
                 } else {
@@ -50,8 +49,6 @@ class CommentsList extends Component {
     }
 
     render() {
-        console.log(this.state.longComments)
-        console.log(this.state.shortComments)
         const longCount = this.state.longComments.length
         const shortCount = this.state.shortComments.length
         const longTitle = longCount + "条长评"

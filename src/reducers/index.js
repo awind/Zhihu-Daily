@@ -21,10 +21,7 @@ function zhihuDaily(state = initState, action) {
                     ...state.stories,
                     [action.date]: action.stories
                 },
-                topStories: [
-                    ...state.topStories,
-                    ...action.topStories
-                ]
+                topStories: action.topStories,
             })
         case LOAD_MORE_NEWS:
             return Object.assign({}, state, {

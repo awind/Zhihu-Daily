@@ -13,18 +13,16 @@ class ThemeNewsList extends Component {
         const { themeStories } = this.props.themeNews
         const themeID = this.props.themeID
         // last element in list
-        const lastID = themeStories.slice(-1)[0].id
-
-        if (lastID) {
-            this.props.getThemeNews(themeID, lastID)
+        if (themeStories.length > 0) {
+            const lastID = themeStories.slice(-1)[0].id
+            if (lastID) {
+                this.props.getThemeNews(themeID, lastID)
+            }
         }
     }
 
     render() {
         const { themeStories } = this.props.themeNews
-        // const storyList = themeStories.sort((a, b) => {
-        //     return a.id < b.id
-        // })
         const themeStoryCount = themeStories.length
         return (
             <div className="container">

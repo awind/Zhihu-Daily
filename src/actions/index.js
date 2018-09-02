@@ -90,6 +90,7 @@ export {
     loadMoreNews,
     receiveThemes,
     receiveThemeNews,
+    loadMoreThemeNews,
     receiveThemeIndex,
     fetchNews,
     fetchThemeNews,

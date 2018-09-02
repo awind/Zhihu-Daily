@@ -20,7 +20,6 @@ class NewsDetail extends Component {
 
     fetchComments = (id) => {
         API.getExtraNews(id).then((data) => {
-            console.log(data)
             this.setState({
                 long_comments: data.long_comments,
                 short_comments: data.short_comments,
@@ -34,7 +33,6 @@ class NewsDetail extends Component {
         const { id } = this.props.match.params
         API.getNewsDetail(id)
             .then(data => {
-                console.log(data)
                 this.setState({detail: data})
         })
         this.fetchComments(id)
