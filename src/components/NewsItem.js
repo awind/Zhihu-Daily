@@ -19,7 +19,7 @@ class NewsItem extends Component {
         }
         return (
             <Card className="card" onClick={this.handleClickItem}>
-                <div className="content">
+                <div className="card-content">
                     <p className="item-title">{title}</p>
                     <div className="img-container">
                         { images && <img className="img-item" src={url} alt={title}></img> }

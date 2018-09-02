@@ -36,7 +36,7 @@ class NewsList extends Component {
                         {
                             Object.keys(stories).sort().reverse().map(date => (
                                 <li key={date}>
-                                    <ul>
+                                    <ul className="u-list">
                                         <ListSubheader>{ currDate === date ? "今日新闻" : formatDate(date)}</ListSubheader>
                                         { stories[date] && stories[date].map((item, index) => {
                                             return (

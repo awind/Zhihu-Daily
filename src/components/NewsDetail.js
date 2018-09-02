@@ -34,6 +34,7 @@ class NewsDetail extends Component {
         API.getNewsDetail(id)
             .then(data => {
                 this.setState({detail: data})
+                console.log(data)
         })
         this.fetchComments(id)
     }
@@ -51,10 +52,12 @@ class NewsDetail extends Component {
         var result = body
         if (body !== undefined && body.match(regex)) {
             result = body.replace(regex, function(m) {
+                console.log(m)
                 return filter.replaceUrl(m)
             })
         }
         const html = '<link rel="stylesheet" type="text/css" href=' + css + ' />' + result
+        console.log(html)
         return (
             <div className="detail-container">
                 <DetailHeader id={id} commentCount={comments} popularity={popularity} shareUrl={share_url}></DetailHeader>

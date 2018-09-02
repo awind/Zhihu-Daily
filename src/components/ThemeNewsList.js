@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
-import '../css/NewsList.css'
+import '../css/ThemeNewsList.css'
 import { List, ListSubheader } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { fetchThemeNews } from '../actions'
@@ -34,7 +34,7 @@ class ThemeNewsList extends Component {
                     <List className="list" subheader={
                         <ListSubheader>
                         {this.props.editors && (
-                            <table>
+                            <table className="editor-table">
                                 <tbody><tr>
                                     <td>主编</td>
                                     {this.props.editors.map((item, index) => {
@@ -45,7 +45,7 @@ class ThemeNewsList extends Component {
                                         }
                                         return (
                                             <td align="center" key={index}>
-                                                <img src={url} alt={name}></img>
+                                                <img className="editor" src={url} alt={name}></img>
                                             </td>
                                         )
                                     })}

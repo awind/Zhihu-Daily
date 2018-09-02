@@ -19,7 +19,7 @@ class CommentItem extends Component {
                         </IconButton>
                         <p style={{ fontSize: 14, marginLeft: 0, paddingLeft: 0 }}>{likes}</p>
                     </div>
-                    <p className="content">{content}</p>
+                    <p className="comment-content">{content}</p>
                 </div>
             </div>
         )
