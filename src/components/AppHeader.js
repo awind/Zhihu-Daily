@@ -8,9 +8,12 @@ import '../css/AppHeader.css'
 import { Drawer, Divider, Avatar, Menu, MenuItem, ListItemText, ListItemIcon, List } from '@material-ui/core'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import AddIcon from '@material-ui/icons/Add'
+import StarIcon from '@material-ui/icons/Star'
+import DownloadIcon from '@material-ui/icons/GetApp'
 import { connect } from 'react-redux'
 import { receiveThemeIndex } from '../actions'
 import { withRouter } from 'react-router'
+import filter from '../utils/filter'
 
 const ITEM_HEIGHT = 36;
 
@@ -40,6 +43,14 @@ class AppHeader extends Component {
         this.setState({ anchorEl: null });
     }
 
+    handleClickStar = () => {
+
+    }
+
+    handleClickDownloadContent = () => {
+        
+    }
+
     handleDrawerItemClick = (index) => {
         this.props.receiveThemeIndex(index)
         const history = this.props.history
@@ -60,6 +71,7 @@ class AppHeader extends Component {
         if (themes.length > 0 && selectedIndex !== 0) {
             title = themes[selectedIndex - 1].name
         }
+        const userImageURL = filter.replaceUrl("https://pic4.zhimg.com/da8e974dc_xl.jpg")
         return (
             <div className="root">
                 <AppBar style={{ backgroundColor: '#0C88EA' }} className="appbar">
@@ -102,8 +114,27 @@ class AppHeader extends Component {
                   onClose={this.toggleDrawer(false)}>
                     <div className="drawer">
                         <div className="drawer-header">
-                            <Avatar className="avatar">ZH</Avatar>
-                            <p className="username">请登录</p>
+                            <div className="profile-header">
+                                <Avatar src={userImageURL} className="avatar"></Avatar>
+                                <p className="username">请登录</p>
+                            </div>
+                            <div className="bookmark">
+                                <MenuItem className="icon-title" onClick={this.handleClickStar}>
+                                    <ListItemIcon>
+                                        <StarIcon style={{ color: '#FFFFFF' }} />
+                                    </ListItemIcon>
+
+                                    <p className="star-text">我的收藏</p>
+                                </MenuItem>
+
+                                <MenuItem className="icon-title" onClick={this.handleClickDownloadContent}>
+                                    <ListItemIcon>
+                                        <DownloadIcon style={{ color: '#FFFFFF' }} />
+                                    </ListItemIcon>
+
+                                    <p className="star-text">离线下载</p>
+                                </MenuItem>
+                            </div>
                         </div>
                     </div>
                     <Divider />

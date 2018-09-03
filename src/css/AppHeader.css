@@ -21,18 +21,40 @@
 
 .drawer-header {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    flex-direction: column;
     background: #0C88EA;
 }
 
+.profile-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bookmark {
+    display: flex;
+    flex-direction: row;
+}
+
 .avatar {
-    margin: 24px 16px;
+    margin: 16px 16px;
 }
 
 .username {
     color: white;
-    font: 14px;
+    font-size: 16px;
     margin: 24px 0;
+}
+
+.star-text {
+    color: white;
+    font-size: 14px;
+    margin: 16px 0;
+}
+
+.icon-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
