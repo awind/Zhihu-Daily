@@ -44,11 +44,12 @@ class AppHeader extends Component {
     }
 
     handleClickStar = () => {
-
+        const history = this.props.history
+        history.push('/stars')
     }
 
     handleClickDownloadContent = () => {
-        
+
     }
 
     handleDrawerItemClick = (index) => {

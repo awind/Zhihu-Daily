@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CommentsHeader from './CommentsHeader';
+import CommonHeader from './CommonHeader';
 import CommentItem from './CommentItem';
 import * as API from '../utils/api'
 import '../css/CommentsList.css'
@@ -51,12 +51,13 @@ class CommentsList extends Component {
     render() {
         const longCount = this.state.longComments.length
         const shortCount = this.state.shortComments.length
+        const count = longCount + shortCount
         const longTitle = longCount + "条长评"
         const shortTitle = shortCount + "条短评"
 
         return (
             <div className="comments-list">
-                <CommentsHeader count={longCount + shortCount}></CommentsHeader>
+                <CommonHeader title={count + "条点评"}></CommonHeader>
                 <List component="nav" style={{marginBottom: '0', paddingBottom: '0'}}>
                     <ListItem button>
                         <ListItemText primary={longTitle} />

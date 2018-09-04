@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import BackIcon from '@material-ui/icons/ArrowBack'
 import { withRouter } from 'react-router'
 
-class CommentsHeader extends Component {
+class CommonHeader extends Component {
 
     handleOnClickBack = () => {
         const { history } = this.props
@@ -23,7 +23,7 @@ class CommentsHeader extends Component {
                         </IconButton>
 
                         <Typography className="flex" variant="title" color="inherit">
-                            {this.props.count}条点评
+                            {this.props.title}
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -32,4 +32,4 @@ class CommentsHeader extends Component {
     }
 }
 
-export default withRouter(CommentsHeader)
+export default withRouter(CommonHeader)

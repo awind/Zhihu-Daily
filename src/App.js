@@ -10,6 +10,7 @@ import { withRouter } from 'react-router'
 import CommentsList from './components/CommentsList'
 import ThemeNews from './components/ThemeNews'
 import ZhihuNews from './components/ZhihuNews'
+import UserLocalStars from './components/UserLocalStars'
 
 class App extends Component {
 
@@ -29,6 +30,13 @@ class App extends Component {
               <ZhihuNews></ZhihuNews>
             </div>
           )}></Route>
+
+          <Route exact path='/stars' component={() => (
+            <div>
+              <UserLocalStars></UserLocalStars>
+            </div>
+          )}></Route>
+          
           <Route exact path='/:themeID' component={() => (
             <div>
               <AppHeader></AppHeader>
