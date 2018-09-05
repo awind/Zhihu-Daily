@@ -64,8 +64,8 @@ class CommentsList extends Component {
                     </ListItem>
                     <List component="div" disablePadding>
                             { longCount > 0 && this.state.longComments.map((item, index) => {
-                                return (<div>
-                                    <CommentItem key={index} item={item}></CommentItem>
+                                return (<div key={index}>
+                                    <CommentItem item={item}></CommentItem>
                                     <Divider />
                                     </div>)
                             })}
@@ -81,8 +81,8 @@ class CommentsList extends Component {
                     <Collapse in={this.state.isShortCommentOpen} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             { shortCount > 0 && this.state.shortComments.map((item, index) => {
-                                return (<div>
-                                    <CommentItem key={index} item={item}></CommentItem>
+                                return (<div key={index}>
+                                    <CommentItem item={item}></CommentItem>
                                     <Divider />
                                     </div>)
                                 })}

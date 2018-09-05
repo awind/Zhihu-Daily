@@ -86,11 +86,7 @@ function fetchThemeNews(themeID, storyID) {
 }
 
 export {
-    receiveNews,
-    loadMoreNews,
     receiveThemes,
-    receiveThemeNews,
-    loadMoreThemeNews,
     receiveThemeIndex,
     fetchNews,
     fetchThemeNews,

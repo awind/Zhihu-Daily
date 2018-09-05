@@ -33,7 +33,7 @@ class DetailHeader extends Component {
     }
 
     handleOnClickThumbUp = () => {
-
+        
     }
 
     render() {
