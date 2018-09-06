@@ -22,6 +22,12 @@ function zhihuDaily(state = initState, action) {
                     [action.date]: action.stories
                 },
                 topStories: action.topStories,
+                themeNews: {
+                    image: "",
+                    description: "",
+                    editors: [],
+                    themeStories: []
+                },
             })
         case LOAD_MORE_NEWS:
             return Object.assign({}, state, {
@@ -37,6 +43,7 @@ function zhihuDaily(state = initState, action) {
         case RECEIVE_THEME_NEWS:
             return {
                 ...state,
+                stories: [],
                 themeNews: {
                     image: action.image,
                     description: action.description,

@@ -38,6 +38,12 @@ class NewsDetail extends Component {
         this.fetchComments(id)
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         const { popularity, comments } = this.state
 
