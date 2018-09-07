@@ -18,8 +18,7 @@ import filter from '../utils/filter'
 const ITEM_HEIGHT = 36;
 
 const options = [
-    '夜间模式',
-    '设置选项',
+    'About',
   ]
 
 class AppHeader extends Component {
@@ -41,6 +40,13 @@ class AppHeader extends Component {
 
     handleClose = () => {
         this.setState({ anchorEl: null });
+    }
+
+    handleClickMenuItem = (option, event) => {
+        if (option === 'About') {
+            const history = this.props.history
+            history.push('/about')
+        }
     }
 
     handleClickStar = () => {
@@ -103,7 +109,7 @@ class AppHeader extends Component {
                           }}
                         >
                             {options.map(option => (
-                                <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.handleClose}>
+                                <MenuItem key={option} selected={option === 'Pyxis'} onClick={event => this.handleClickMenuItem(option, event)}>
                                 {option}
                                 </MenuItem>
                             ))}

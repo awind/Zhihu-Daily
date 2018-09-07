@@ -3,7 +3,6 @@ import CommonHeader from './CommonHeader'
 import NewsItem from './NewsItem'
 import store from 'store'
 import '../css/UserLocalStars.css'
-import Snackbar from '@material-ui/core/Snackbar'
 
 class UserLocalStars extends Component {
 

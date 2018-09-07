@@ -16,8 +16,8 @@ class CommentItem extends Component {
                         <p className="author">{author}</p>
                         <IconButton className="thumb">
                             <ThumbUpIcon style={{ fontSize: 14 }} color="inherit" aria-label="Thumb Up" />
+                            <p style={{ fontSize: 14, marginLeft: 4, paddingLeft: 0, color: '#000000' }}>{likes}</p>
                         </IconButton>
-                        <p style={{ fontSize: 14, marginLeft: 0, paddingLeft: 0 }}>{likes}</p>
                     </div>
                     <p className="comment-content">{content}</p>
                 </div>

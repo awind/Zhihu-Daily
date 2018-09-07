@@ -22,6 +22,7 @@ class DetailHeader extends Component {
             open: false,
             vertical: 'bottom',
             horizontal: 'center',
+            message: "保存成功",
         };
     }
 
@@ -40,7 +41,17 @@ class DetailHeader extends Component {
     };
 
     handleOnClickShare = () => {
-
+        // cosnt text = 
+        var dummy = document.createElement("input");
+        document.body.appendChild(dummy);
+        dummy.setAttribute('value', 'share_url');
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        this.setState({ 
+            open: true,
+            message: '已保存至剪切板中',
+        })
     }
 
     handleOnClickStar = () => {
@@ -79,8 +90,10 @@ class DetailHeader extends Component {
                 if (isExist) {
                 }
                 else {
-                    console.log('store star');
-                    this.setState({ open: true })
+                    this.setState({ 
+                        open: true,
+                        message: "保存成功！"
+                    })
                     store.set('themeNews', newsList.concat(element));
                 }
                 return;
@@ -103,8 +116,10 @@ class DetailHeader extends Component {
                     if (isExist) {
                     }
                     else {
-                        console.log('store star');
-                        this.setState({ open: true })
+                        this.setState({ 
+                            open: true,
+                            message: "保存成功！"
+                        })
                         store.set('news', newsList.concat(element));
                     }
                     return;
@@ -154,7 +169,7 @@ class DetailHeader extends Component {
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
-                    message={<span id="message-id">保存成功！</span>}
+                    message={<span id="message-id">{this.state.message}</span>}
                 />
             </div>
         )

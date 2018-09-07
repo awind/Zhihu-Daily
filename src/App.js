@@ -11,6 +11,7 @@ import CommentsList from './components/CommentsList'
 import ThemeNews from './components/ThemeNews'
 import ZhihuNews from './components/ZhihuNews'
 import UserLocalStars from './components/UserLocalStars'
+import AboutPage from './components/AboutPage'
 
 class App extends Component {
 
@@ -37,6 +38,12 @@ class App extends Component {
             </div>
           )}></Route>
           
+          <Route exact path='/about' component={() => (
+            <div>
+              <AboutPage></AboutPage>
+            </div>
+          )}></Route>
+
           <Route exact path='/:themeID' component={() => (
             <div>
               <AppHeader></AppHeader>
