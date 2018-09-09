@@ -1,0 +1,10 @@
+.about {
+    margin-top: 68px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+a {
+    color: black;
+    text-decoration: none; /* no underline */
+  }
