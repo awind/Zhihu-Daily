@@ -6,10 +6,6 @@ import '../css/UserLocalStars.css'
 
 class UserLocalStars extends Component {
 
-    // componentDidMount() {
-    //     store.clearAll()
-    // }
-
     render() {
         const news = store.get('news') || []
         const themeNews = store.get('themeNews') || []
@@ -20,13 +16,11 @@ class UserLocalStars extends Component {
                 <li className="star-list">
                     <ul className="u-list">
                         { newsList && newsList.map((item, index) => {
-                            if(item !== undefined) {
-                                return (
-                                    <li key={index}>
-                                        <NewsItem news={item} />
-                                    </li> 
-                                )}
-                            }
+                            return (
+                                <li key={index}>
+                                    <NewsItem news={item} />
+                                </li> 
+                            )}
                         )
                         }
                     </ul>

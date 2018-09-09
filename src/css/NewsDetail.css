@@ -1,11 +1,11 @@
 .detail-container {
-    margin-top: 48px;
+    margin-top: 230px;
 }
 
 .header {
     position: absolute;
-    height: 200px;
-    margin-top: 48px;
+    height: 375px;
+    margin-top: 56px;
     top: 0;
     left: 0;
     right: 0;
@@ -19,9 +19,25 @@
     right: 0;
     margin: 0;
     padding: 0;
-    height: 200px;
+    height: 375px;
     width: 100%;
     object-fit: cover;
+}
+
+/* for mobile */
+@media screen and (max-width: 540px) {
+    .detail-container {
+        margin-top: 54px;
+    }
+
+    .header {
+        height: 200px;
+        margin-top: 56px;
+    }
+
+    .detail-image {
+        height: 200px;
+    }
 }
 
 .detail-text {

@@ -41,10 +41,10 @@ class DetailHeader extends Component {
     };
 
     handleOnClickShare = () => {
-        // cosnt text = 
+        const url = this.props.shareUrl
         var dummy = document.createElement("input");
         document.body.appendChild(dummy);
-        dummy.setAttribute('value', 'share_url');
+        dummy.setAttribute('value', url);
         dummy.select();
         document.execCommand("copy");
         document.body.removeChild(dummy);
@@ -88,6 +88,14 @@ class DetailHeader extends Component {
                     }
                 });
                 if (isExist) {
+                    const list = newsList.filter(item => {
+                        return item.id !== id
+                    })
+                    store.set('themeNews', list)
+                    this.setState({ 
+                        open: true,
+                        message: "取消收藏"
+                    })
                 }
                 else {
                     this.setState({ 
@@ -114,6 +122,14 @@ class DetailHeader extends Component {
                         }
                     });
                     if (isExist) {
+                        const list = newsList.filter(item => {
+                            return item.id !== id
+                        })
+                        this.setState({ 
+                            open: true,
+                            message: "取消保存!"
+                        })
+                        store.set('news', list);
                     }
                     else {
                         this.setState({ 
