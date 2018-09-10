@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { List, ListItem, ListItemText, Divider, ListSubheader } from '@material-ui/core';
 import CommonHeader from './CommonHeader'
 import '../css/AboutPage.css'
-import {Link} from 'react-router-dom'
 
 const thirdLibraryList = [
     {
@@ -61,20 +60,20 @@ class AboutPage extends Component {
                 </div>
                 <List subheader={<li />}>
                     <ListSubheader>Github</ListSubheader>
-                    <ListItem key="repo" button component="a" href="https://github.com/awind/Zhihu-Daily">
+                    <ListItem button component="a" href="https://github.com/awind/Zhihu-Daily">
                         <ListItemText>Zhihu-Daily</ListItemText>
                     </ListItem>
                     <Divider />
                     <ListSubheader>Thanks to</ListSubheader>
-                    <ListItem key="thanks-to" button component="a" href="https://github.com/izzyleung/ZhihuDailyPurify/wiki/知乎日报-API-分析"> 
+                    <ListItem button component="a" href="https://github.com/izzyleung/ZhihuDailyPurify/wiki/知乎日报-API-分析"> 
                         <ListItemText>知乎日报 API 分析</ListItemText>
                     </ListItem>
                     <Divider />
                     <ListSubheader>3rd Library List</ListSubheader>
                     { thirdLibraryList.map((item, index) => {
                         return (
-                            <div>
-                                <ListItem key={index} onClick={event => this.handleOnClick(index)}>
+                            <div key={index}>
+                                <ListItem onClick={event => this.handleOnClick(index)}>
                                     <ListItemText primary={item.name}></ListItemText>
                                 </ListItem> 
                                 <Divider />
