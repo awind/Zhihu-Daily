@@ -11,14 +11,13 @@ This is a demo project for practice React.js.
 + Same user experience with mobile device
 
 ## Screenshots
-<br />
-<img src="screenshots/screenshot-1.png" width="210">
-<img src="screenshots/screenshot-2.png" width="210">
-<img src="screenshots/screenshot-3.png" width="210">
-<img src="screenshots/screenshot-4.png" width="210">
-<img src="screenshots/screenshot-5.png" width="210">
-<img src="screenshots/screenshot-6.png" width="210">
-<br />
+
+![](screenshots/screenshot-1.png?raw=true) | ![](screenshots/screenshot-2.png?raw=true)  
+
+![](screenshots/screenshot-3.png?raw=true) | ![](screenshots/screenshot-4.png?raw=true)
+
+![](screenshots/screenshot-5.png?raw=true) | ![](screenshots/screenshot-6.png?raw=true)
+
 
 # Contact 
 Follow and contact me on [Twitter](https://twitter.com/debitosou) or [Sina Weibo](http://www.weibo.com/isongfei). If you find an issue, just open a ticket on it. Pull requests are warmly welcome as well.
