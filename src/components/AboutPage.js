@@ -29,9 +29,6 @@ const thirdLibraryList = [
         name: "Store.js",
         url: "https://github.com/marcuswestin/store.js",
     }, {
-        name: "Moment",
-        url: "https://github.com/moment/moment",
-    }, {
         name: "react-infinite-scroll-component",
         url: "https://github.com/ankeetmaini/react-infinite-scroll-component",
     },

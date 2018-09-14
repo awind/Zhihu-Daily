@@ -5,7 +5,7 @@ import { List, ListSubheader } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { fetchNews } from '../actions'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { today, yesterday, formatDate } from '../utils/date'
+import { getCurrentDate, dateBefore, formatDate } from '../utils/date'
 
 class NewsList extends Component {
 
@@ -13,14 +13,14 @@ class NewsList extends Component {
         const stories = this.props.stories
         const keys = Object.keys(stories).sort()
         if (keys.length > 0) {
-            const prevDate = yesterday(keys[0])
-            this.props.getNews(prevDate)
+            const beforeDate = dateBefore(keys[0], 1)
+            this.props.getNews(beforeDate)
         }
     }
 
     render() {
         const { stories } = this.props
-        const currDate = today()
+        const currDate = getCurrentDate()
         var storyCount = 0
         for (var key in stories) {
             const item = stories[key]
